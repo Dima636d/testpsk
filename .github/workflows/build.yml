@@ -9,14 +9,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Unpack project if zipped
+      - name: Unpack project
         run: |
-          # Если ты загрузил проект в виде zip-архива, распакуем его
-          unzip -q *.zip -d project_folder || true
+          unzip -q *.zip -d . || true
 
-      - name: Build Godot APK
-        uses: abarnetic/godot-action@v2
+      - name: Export to Android
+        uses: firebelley/godot-export@v5.2.0
         with:
-          name: game
-          godot-version: 4.7.2
+          godot: 4.7.2
           android: true
