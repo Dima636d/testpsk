@@ -1,0 +1,22 @@
+name: Build Android APK
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Unpack project if zipped
+        run: |
+          # Если ты загрузил проект в виде zip-архива, распакуем его
+          unzip -q *.zip -d project_folder || true
+
+      - name: Build Godot APK
+        uses: abarnetic/godot-action@v2
+        with:
+          name: game
+          godot-version: 4.7.2
+          android: true
